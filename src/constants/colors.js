@@ -10,3 +10,7 @@ export const colors = {
     red: "#ff0000",
   }
   
+  const marcas = {
+    marcaPrincipal: "Coca Cola",
+    segundaMarca: "telecomunicaciones",
+}
