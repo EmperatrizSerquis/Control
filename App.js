@@ -1,37 +1,41 @@
-import BottomTabNavigator from './src/navigation/BottomTabNavigator'
-import { NavigationContainer } from '@react-navigation/native'
-import { Provider } from 'react-redux'
-import { store } from './src/store'
-import { SafeAreaView, StyleSheet,  ActivityIndicator } from 'react-native';
-import fonts from './src/global/fonts'
-import { useFonts } from 'expo-font'
+import { StyleSheet, SafeAreaView, Platform, StatusBar } from 'react-native';
+import { useFonts } from "expo-font";
+import AppNavigator from './src/navigation';
+import { Provider } from 'react-redux';
+import { store } from './src/store';
+import { init } from './src/db';
 
-const image = { uri: "https://eproweb.net/pictures/about_us_pics/1/blue-bin9VbG.jpg" };
+init()
+    .then(() => console.log('DB initialized'))
+    .catch(err => console.log('DB failed', err.message))
 
-export default function App() {
+const App = () => {
 
-  const [fontsLoaded] = useFonts(fonts)
+    const [loaded] = useFonts({
+        'Inter-Regular': require('./src/assets/fonts/Inter-Regular.ttf'),
+        'Inter-Bold': require('./src/assets/fonts/Inter-Bold.ttf'),
+        'Inter-Light': require('./src/assets/fonts/Inter-Light.ttf'),
+        'Inter-Black': require('./src/assets/fonts/Inter-Black.ttf'),
+    });
 
-  if (!fontsLoaded) {
-    return (<ActivityIndicator size={"large"} />)
-  }
+    if (!loaded) {
+        return null
+    }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Provider store={store}>
-        <NavigationContainer>
-          <BottomTabNavigator />
-        </NavigationContainer>
-      </Provider>
-    </SafeAreaView>
-  )
-
-
+    return (
+        <Provider store={store}>
+            <SafeAreaView style={styles.container}>
+                <AppNavigator />
+            </SafeAreaView>
+        </Provider>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
+    container: {
+        flex: 1,
+        marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    },
 });
+
+export default App;
