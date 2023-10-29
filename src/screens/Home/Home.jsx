@@ -9,6 +9,7 @@ const Home = ({ navigation }) => (
     <ImageBackground source={image} style={styles.image}>
       <Text style={styles.text}>To be in Control</Text>
       <Text style={styles.text}>of your Payments</Text>
+      <Text style={styles.textContainer}>APP to remember Dues controlling your Bills !</Text>
       <View style={styles.action}>
       <Text> 
         <TouchableOpacity onPress={() => navigation.navigate('Categories')} style={styles.categoriesButton} >

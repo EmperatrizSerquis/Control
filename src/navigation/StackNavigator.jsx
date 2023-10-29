@@ -1,14 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native'
 import  { Home, Categories, Payments, CategoriesDetail, PaymentsDetail }  from '../screens'
 import  { Header }  from '../components'
-import { NavigationContainer } from '@react-navigation/native'
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator()
 
 function StackNavigator() {
   return (
-    <NavigationContainer>
+    
       <Stack.Navigator 
         initialRouteName="Home"
         screenOptions={({ route, navigation }) => ({
@@ -34,27 +34,17 @@ function StackNavigator() {
 
         <Stack.Screen name="CategoriesDetail" component={CategoriesDetail} 
         options={{ headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.goBack()} >
+                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button}>
                     <Text style={{color: 'red', fontSize: 30}}>Go Back</Text>
                 </TouchableOpacity>
             ),  }}   
             />
             
-        <Stack.Screen name="Payments" component={Payments} /* options={{ headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.goBack()} >
-                    <Text style={{color: 'red', fontSize: 30}}>Go Back</Text>
-                </TouchableOpacity>
-            ),  }} */    
-            />
-          <Stack.Screen name="PaymentsDetail" component={PaymentsDetail} 
-          /* options={{ headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.goBack()} >
-                    <Text style={{color: 'red', fontSize: 30}}>Go Back</Text>
-                </TouchableOpacity>
-            ),  }}  */  />
+        <Stack.Screen name="Payments" component={Payments} />
+        <Stack.Screen name="PaymentsDetail" component={PaymentsDetail} />
         
       </Stack.Navigator>
-    </NavigationContainer>
+    
   )
 }
 
@@ -70,7 +60,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#2196f3',
       padding: 20,
       borderRadius: 5,
-      marginTop: 20,
+      marginVertical: 10,
+      justifyContent: "center",
+      alignItems: "center",
   },
   textButton: {
       color: "white",

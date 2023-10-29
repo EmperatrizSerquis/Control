@@ -1,5 +1,8 @@
-import StackNavigator from './src/navigation/StackNavigator'
-import { SafeAreaView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import BottomTabNavigator from './src/navigation/BottomTabNavigator'
+import { NavigationContainer } from '@react-navigation/native'
+import { Provider } from 'react-redux'
+import { store } from './src/store'
+import { SafeAreaView, StyleSheet,  ActivityIndicator } from 'react-native';
 import fonts from './src/global/fonts'
 import { useFonts } from 'expo-font'
 
@@ -15,7 +18,11 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StackNavigator />
+      <Provider store={store}>
+        <NavigationContainer>
+          <BottomTabNavigator />
+        </NavigationContainer>
+      </Provider>
     </SafeAreaView>
   )
 
